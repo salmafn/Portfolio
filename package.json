@@ -1,0 +1,17 @@
+{
+  "name": "portfolio-salma-fennane",
+  "type": "module",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "deploy": "vercel --yes --prod"
+  },
+  "dependencies": {
+    "astro": "^5.5.0",
+    "@astrojs/vercel": "^8.1.0"
+  }
+}

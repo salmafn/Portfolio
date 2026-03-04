@@ -1,0 +1,97 @@
+---
+/**
+ * @component BackToTop
+ * @description Floating back-to-top button that appears after 500px scroll.
+ * Glassmorphism styling with smooth scroll to top on click.
+ */
+---
+
+<button class="btt" id="back-to-top" aria-label="Retour en haut de page">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="12" y1="19" x2="12" y2="5"/>
+    <polyline points="5 12 12 5 19 12"/>
+  </svg>
+</button>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const btn = document.getElementById('back-to-top')!;
+
+    /* Show/hide on scroll */
+    const handleScroll = () => {
+      if (window.scrollY > 500) {
+        btn.classList.add('visible');
+      } else {
+        btn.classList.remove('visible');
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+
+    /* Scroll to top */
+    btn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  });
+</script>
+
+<style>
+  .btt {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 900;
+
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(17, 24, 39, 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    color: var(--color-text-muted);
+
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(20px);
+    pointer-events: none;
+    transition: all var(--transition-base);
+  }
+
+  .btt.visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: all;
+  }
+
+  .btt:hover {
+    color: #fff;
+    border-color: var(--color-primary);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(99, 102, 241, 0.2);
+  }
+
+  .btt svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  @media (max-width: 768px) {
+    .btt {
+      width: 42px;
+      height: 42px;
+      bottom: 1.25rem;
+      right: 1.25rem;
+    }
+
+    .btt svg {
+      width: 18px;
+      height: 18px;
+    }
+  }
+</style>

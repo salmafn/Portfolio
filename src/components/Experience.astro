@@ -1,0 +1,190 @@
+---
+/**
+ * @component Experience
+ * @description Professional experience section with stacked cards,
+ * left gradient accent bar, period/current badges, and hover effects.
+ * Only rendered if experience array has entries.
+ */
+
+import { experience } from '../data/portfolio';
+
+const externalLinkIcon = '<line x1="18" y1="13" x2="18" y2="6"/><polyline points="15 6 18 6 18 9"/><path d="M10 14 18 6"/><path d="M21 14v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>';
+---
+
+{experience.length > 0 && (
+  <section class="section experience" id="experience">
+    <div class="container">
+      <div class="section__header reveal">
+        <span class="section__label">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+          </svg>
+          Expérience
+        </span>
+        <h2 class="section__title">Expérience <span class="gradient-text">Professionnelle</span></h2>
+      </div>
+
+      <div class="experience__list stagger-children">
+        {experience.map((entry, i) => (
+          <div class="experience__card glass-card reveal" style={`--stagger-index: ${i}`}>
+            <div class="experience__accent"></div>
+            <div class="experience__content">
+              <div class="experience__top">
+                <span class="experience__period">{entry.period}</span>
+                {entry.isCurrent && <span class="experience__badge-current">Current</span>}
+              </div>
+
+              <h3 class="experience__role">{entry.role}</h3>
+
+              {entry.companyUrl ? (
+                <a href={entry.companyUrl} target="_blank" rel="noopener noreferrer" class="experience__company">
+                  {entry.company}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="experience__ext-icon">
+                    <Fragment set:html={externalLinkIcon} />
+                  </svg>
+                </a>
+              ) : (
+                <p class="experience__company experience__company--text">{entry.company}</p>
+              )}
+
+              <p class="experience__description">{entry.description}</p>
+            </div>
+            <div class="experience__card-glow"></div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+)}
+
+<style>
+  .experience__list {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .experience__card {
+    position: relative;
+    padding: 1.75rem;
+    padding-left: 2rem;
+    overflow: hidden;
+    transition: all var(--transition-base);
+  }
+
+  .experience__card:hover {
+    transform: translateY(-4px) translateX(4px);
+  }
+
+  .experience__accent {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: var(--gradient-primary);
+    border-radius: 0 4px 4px 0;
+  }
+
+  .experience__card-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--gradient-primary);
+    opacity: 0;
+    transition: opacity var(--transition-base);
+  }
+
+  .experience__card:hover .experience__card-glow {
+    opacity: 1;
+  }
+
+  .experience__content {
+    position: relative;
+  }
+
+  .experience__top {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .experience__period {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    padding: 0.25rem 0.75rem;
+    background: rgba(99, 102, 241, 0.08);
+    border: 1px solid rgba(99, 102, 241, 0.12);
+    border-radius: var(--radius-full);
+  }
+
+  .experience__badge-current {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--color-success);
+    padding: 0.2rem 0.6rem;
+    background: rgba(34, 197, 94, 0.1);
+    border: 1px solid rgba(34, 197, 94, 0.2);
+    border-radius: var(--radius-full);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .experience__role {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 0.3rem;
+  }
+
+  .experience__company {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.88rem;
+    color: var(--color-primary-light);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+    margin-bottom: 0.75rem;
+  }
+
+  a.experience__company:hover {
+    color: var(--color-accent-light);
+  }
+
+  .experience__company--text {
+    display: block;
+  }
+
+  .experience__ext-icon {
+    width: 14px;
+    height: 14px;
+    opacity: 0.6;
+  }
+
+  .experience__description {
+    font-size: 0.88rem;
+    line-height: 1.7;
+    color: var(--color-text-muted);
+  }
+
+  @media (max-width: 768px) {
+    .experience__card {
+      padding: 1.25rem;
+      padding-left: 1.5rem;
+    }
+
+    .experience__card:hover {
+      transform: translateY(-2px);
+    }
+  }
+</style>

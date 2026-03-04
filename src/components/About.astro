@@ -1,0 +1,111 @@
+---
+/**
+ * @component About
+ * @description About section with numbered cards (01, 02, etc.)
+ * featuring left gradient accent bars and stagger reveal animations.
+ */
+
+import { personalInfo } from '../data/portfolio';
+
+const aboutParagraphs = personalInfo.bio;
+---
+
+<section class="section about" id="about">
+  <div class="container">
+    <div class="section__header reveal">
+      <span class="section__label">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+        </svg>
+        À Propos
+      </span>
+      <h2 class="section__title">Qui suis-je<span class="gradient-text"> ?</span></h2>
+    </div>
+
+    <div class="about__grid stagger-children">
+      {aboutParagraphs.map((paragraph, i) => (
+        <div class="about__card glass-card reveal" style={`--stagger-index: ${i}`}>
+          <div class="about__card-accent"></div>
+          <div class="about__card-content">
+            <span class="about__card-number">{String(i + 1).padStart(2, '0')}</span>
+            <p class="about__card-text">{paragraph}</p>
+          </div>
+          <div class="about__card-glow"></div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .about__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .about__card {
+    position: relative;
+    padding: 1.75rem;
+    padding-left: 2rem;
+    overflow: hidden;
+  }
+
+  .about__card-accent {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: var(--gradient-primary);
+    border-radius: 0 4px 4px 0;
+  }
+
+  .about__card-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--gradient-primary);
+    opacity: 0;
+    transition: opacity var(--transition-base);
+  }
+
+  .about__card:hover .about__card-glow {
+    opacity: 1;
+  }
+
+  .about__card-content {
+    position: relative;
+  }
+
+  .about__card-number {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--color-primary-light);
+    margin-bottom: 0.75rem;
+    opacity: 0.7;
+  }
+
+  .about__card-text {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--color-text-muted);
+  }
+
+  @media (max-width: 768px) {
+    .about__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .about__card {
+      padding: 1.25rem;
+      padding-left: 1.5rem;
+    }
+  }
+</style>

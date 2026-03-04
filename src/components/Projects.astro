@@ -1,0 +1,204 @@
+---
+/**
+ * @component Projects
+ * @description Grid of project cards with decorative gradient number watermark,
+ * title with external link, description, technology tags, and hover effects.
+ */
+
+import { projects } from '../data/portfolio';
+
+const externalLinkIcon = '<line x1="18" y1="13" x2="18" y2="6"/><polyline points="15 6 18 6 18 9"/><path d="M10 14 18 6"/><path d="M21 14v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>';
+const arrowRightIcon = '<line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>';
+---
+
+<section class="section projects" id="projects">
+  <div class="container">
+    <div class="section__header reveal">
+      <span class="section__label">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+        </svg>
+        Projets
+      </span>
+      <h2 class="section__title">Mes <span class="gradient-text">Projets</span></h2>
+    </div>
+
+    <div class="projects__grid stagger-children">
+      {projects.map((project, i) => (
+        <div class="projects__card glass-card reveal" style={`--stagger-index: ${i}`}>
+          <div class="projects__card-glow"></div>
+
+          <span class="projects__number gradient-text" aria-hidden="true">
+            {String(i + 1).padStart(2, '0')}
+          </span>
+
+          <div class="projects__content">
+            <h3 class="projects__title">
+              {project.url ? (
+                <a href={project.url} target="_blank" rel="noopener noreferrer">
+                  {project.title}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="projects__ext-icon">
+                    <Fragment set:html={externalLinkIcon} />
+                  </svg>
+                </a>
+              ) : (
+                project.title
+              )}
+            </h3>
+
+            <p class="projects__description">{project.description}</p>
+
+            <div class="projects__tags">
+              {project.tags.map((tag) => (
+                <span class="projects__tag">{tag}</span>
+              ))}
+            </div>
+
+            {project.url && (
+              <a href={project.url} target="_blank" rel="noopener noreferrer" class="projects__view">
+                View Project
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="projects__arrow">
+                  <Fragment set:html={arrowRightIcon} />
+                </svg>
+              </a>
+            )}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .projects__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 1.5rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .projects__card {
+    position: relative;
+    padding: 2rem 1.75rem;
+    overflow: hidden;
+  }
+
+  .projects__card-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--gradient-primary);
+    opacity: 0;
+    transition: opacity var(--transition-base);
+  }
+
+  .projects__card:hover .projects__card-glow {
+    opacity: 1;
+  }
+
+  .projects__number {
+    position: absolute;
+    top: 0.5rem;
+    right: 1rem;
+    font-size: 4rem;
+    font-weight: 900;
+    opacity: 0.08;
+    line-height: 1;
+    pointer-events: none;
+    font-family: var(--font-mono);
+  }
+
+  .projects__content {
+    position: relative;
+  }
+
+  .projects__title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 0.75rem;
+  }
+
+  .projects__title a {
+    color: #fff;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: color var(--transition-fast);
+  }
+
+  .projects__title a:hover {
+    color: var(--color-primary-light);
+  }
+
+  .projects__ext-icon {
+    width: 16px;
+    height: 16px;
+    opacity: 0.5;
+    flex-shrink: 0;
+  }
+
+  .projects__description {
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: var(--color-text-muted);
+    margin-bottom: 1rem;
+  }
+
+  .projects__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 1rem;
+  }
+
+  .projects__tag {
+    padding: 0.25rem 0.65rem;
+    background: rgba(168, 85, 247, 0.06);
+    border: 1px solid rgba(168, 85, 247, 0.12);
+    border-radius: var(--radius-full);
+    font-size: 0.72rem;
+    font-weight: 500;
+    color: var(--color-accent-light);
+  }
+
+  .projects__view {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-primary-light);
+    text-decoration: none;
+    transition: all var(--transition-fast);
+  }
+
+  .projects__view:hover {
+    gap: 0.7rem;
+    color: #fff;
+  }
+
+  .projects__arrow {
+    width: 16px;
+    height: 16px;
+    transition: transform var(--transition-fast);
+  }
+
+  .projects__view:hover .projects__arrow {
+    transform: translateX(4px);
+  }
+
+  @media (max-width: 768px) {
+    .projects__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .projects__card {
+      padding: 1.5rem 1.25rem;
+    }
+  }
+</style>

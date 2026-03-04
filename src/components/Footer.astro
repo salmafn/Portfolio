@@ -1,0 +1,214 @@
+---
+/**
+ * @component Footer
+ * @description Three-column footer with brand info, quick navigation
+ * (only active sections), and social links. Copyright bar at bottom.
+ */
+
+import { personalInfo, navItems, socialLinks } from '../data/portfolio';
+
+/* Lucide SVG paths */
+const icons: Record<string, string> = {
+  terminal: '<polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/>',
+  linkedin: '<path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/>',
+  github: '<path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>',
+  mail: '<path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>',
+  heart: '<path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>',
+};
+---
+
+<footer class="footer">
+  <div class="footer__container">
+    <div class="footer__grid">
+      <!-- Brand -->
+      <div class="footer__brand">
+        <a href="#hero" class="footer__logo">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="footer__logo-icon">
+            <Fragment set:html={icons.terminal} />
+          </svg>
+          <span>{personalInfo.firstName} <span class="gradient-text">{personalInfo.lastName}</span></span>
+        </a>
+        <p class="footer__description">
+          {personalInfo.title}. {personalInfo.subtitle.slice(0, 120)}...
+        </p>
+      </div>
+
+      <!-- Quick nav -->
+      <div class="footer__nav-section">
+        <h4 class="footer__heading">Navigation</h4>
+        <nav class="footer__nav">
+          {navItems.map((item) => (
+            <a href={item.href} class="footer__nav-link">{item.label}</a>
+          ))}
+        </nav>
+      </div>
+
+      <!-- Social -->
+      <div class="footer__social-section">
+        <h4 class="footer__heading">Connexion</h4>
+        <div class="footer__social-list">
+          {socialLinks.map((link) => (
+            <a href={link.url} target="_blank" rel="noopener noreferrer" class="footer__social-link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <Fragment set:html={icons[link.icon] || ''} />
+              </svg>
+              <span>{link.name}</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="footer__bottom">
+      <p>
+        &copy; {new Date().getFullYear()} {personalInfo.firstName} {personalInfo.lastName}. Tous droits réservés.
+      </p>
+      <p class="footer__credits">
+        Built with
+        <a href="https://astro.build" target="_blank" rel="noopener noreferrer">Astro</a>
+        — Deployed on
+        <a href="https://vercel.com" target="_blank" rel="noopener noreferrer">Vercel</a>
+      </p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: rgba(10, 15, 30, 0.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-top: 1px solid var(--color-border);
+    padding: 4rem 1.5rem 0;
+  }
+
+  .footer__container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+  }
+
+  .footer__grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr;
+    gap: 3rem;
+    margin-bottom: 3rem;
+  }
+
+  /* Brand */
+  .footer__logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+  }
+
+  .footer__logo-icon {
+    width: 22px;
+    height: 22px;
+    color: var(--color-primary-light);
+  }
+
+  .footer__description {
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: var(--color-text-muted);
+    max-width: 320px;
+  }
+
+  /* Heading */
+  .footer__heading {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-text-muted);
+    margin-bottom: 1.25rem;
+  }
+
+  /* Nav */
+  .footer__nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .footer__nav-link {
+    font-size: 0.88rem;
+    color: var(--color-text-muted);
+    text-decoration: none;
+    transition: all var(--transition-fast);
+  }
+
+  .footer__nav-link:hover {
+    color: #fff;
+    transform: translateX(4px);
+  }
+
+  /* Social */
+  .footer__social-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .footer__social-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.88rem;
+    color: var(--color-text-muted);
+    text-decoration: none;
+    transition: all var(--transition-fast);
+  }
+
+  .footer__social-link:hover {
+    color: #fff;
+    transform: translateX(4px);
+  }
+
+  .footer__social-link svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+  }
+
+  /* Bottom bar */
+  .footer__bottom {
+    border-top: 1px solid var(--color-border);
+    padding: 1.5rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+  }
+
+  .footer__credits a {
+    color: var(--color-primary-light);
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .footer__credits a:hover {
+    color: #fff;
+  }
+
+  @media (max-width: 768px) {
+    .footer__grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .footer__bottom {
+      flex-direction: column;
+      text-align: center;
+    }
+  }
+</style>
