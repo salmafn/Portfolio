@@ -20,6 +20,8 @@ export interface PersonalInfo {
   avatar: string;
   availabilityBadge: string;
   cvFile?: string;
+  cvPdfFile?: string;
+  cvWordFile?: string;
 }
 
 export interface Stat {
@@ -108,6 +110,8 @@ export const personalInfo: PersonalInfo = {
   avatar: '/avatar.svg',
   availabilityBadge: 'Ouverte aux opportunités de recherche & collaboration',
   cvFile: '/cv-salma-fennane.pdf',
+  cvPdfFile: '/cv-salma-fennane.pdf',
+  cvWordFile: '/cv-salma-fennane.docx',
 };
 
 /* ------------------------------------------------------------------ */

@@ -32,6 +32,7 @@ Personal portfolio website built with **Astro** and deployed on **Vercel**.
 | Commande | Action |
 | --- | --- |
 | `npm install` | Installer les dépendances |
+| `npm run generate:cv` | Générer le CV PDF + Word à partir de `src/data/portfolio.ts` |
 | `npm run dev` | Lancer le serveur de développement (`localhost:4321`) |
 | `npm run build` | Build de production |
 | `npm run preview` | Prévisualiser le build localement |
@@ -47,13 +48,21 @@ src/data/portfolio.ts
 
 Modifiez les données dans ce fichier, puis relancez `npm run build` pour régénérer le site.
 
+Les fichiers CV sont générés automatiquement à partir des données du portfolio :
+
+- `public/cv-salma-fennane.pdf`
+- `public/cv-salma-fennane.docx`
+
 ## Structure du projet
 
 ```
 portfolio/
 ├── public/
 │   ├── avatar.svg
-│   └── cv-salma-fennane.pdf
+│   ├── cv-salma-fennane.pdf
+│   └── cv-salma-fennane.docx
+├── scripts/
+│   └── generate-cv.ts
 ├── src/
 │   ├── components/
 │   │   ├── Header.astro

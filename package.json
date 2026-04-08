@@ -3,15 +3,19 @@
   "type": "module",
   "version": "1.0.0",
   "scripts": {
-    "dev": "astro dev",
+    "generate:cv": "tsx scripts/generate-cv.ts",
+    "dev": "npm run generate:cv && astro dev",
     "start": "astro dev",
-    "build": "astro build",
+    "build": "npm run generate:cv && astro build",
     "preview": "astro preview",
     "astro": "astro",
     "deploy": "vercel --yes --prod"
   },
   "dependencies": {
+    "@astrojs/vercel": "^8.1.0",
     "astro": "^5.5.0",
-    "@astrojs/vercel": "^8.1.0"
+    "docx": "^9.5.1",
+    "pdfkit": "^0.17.2",
+    "tsx": "^4.20.6"
   }
 }
