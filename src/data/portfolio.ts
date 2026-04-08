@@ -95,14 +95,14 @@ export interface NavItem {
 export const personalInfo: PersonalInfo = {
   firstName: 'Salma',
   lastName: 'Fennane',
-  title: 'Data Scientist & AI Researcher',
+  title: 'Data Scientist',
   subtitle:
-    'Passionnée par le Machine Learning, le Deep Learning et l\'Intelligence Artificielle — transformant les données en solutions innovantes.',
+    'Passionnée par la résolution de problèmes complexes avec le Machine Learning, le Deep Learning et l\'Intelligence Artificielle.',
   bio: [
-    "Data Scientist passionnée par la résolution de problèmes complexes à l'aide du Machine Learning, du Deep Learning et de l'Intelligence Artificielle. Mon expertise couvre l'ensemble du pipeline de données, de la collecte et du nettoyage à la modélisation et au déploiement.",
-    "Actuellement doctorante en première année en intelligence artificielle appliquée à la médecine, je combine recherche académique et enseignement en Data Science. Mon parcours m'a permis de développer une solide maîtrise des outils et frameworks modernes de l'IA.",
-    "Motivée par l'optimisation des processus et l'innovation, je cherche constamment à mettre mes compétences techniques au service de projets stimulants ayant un impact concret. Mon expérience d'enseignante me permet également de vulgariser des concepts complexes.",
-    "Je maîtrise un large éventail de technologies allant du Machine Learning classique au Deep Learning, en passant par le Big Data, la Business Intelligence et le développement web. Je suis toujours à la recherche de nouvelles opportunités de collaboration et d'apprentissage.",
+    "Data Scientist passionnée par la résolution de problèmes complexes en utilisant le Machine Learning, le Deep Learning et l'Intelligence Artificielle.",
+    "Actuellement doctorante en première année en Intelligence Artificielle appliquée à la médecine, je combine recherche académique et enseignement en Data Science.",
+    "Motivée par l'optimisation des processus d'affaires et l'innovation, je cherche à mettre mes compétences techniques au service de projets innovants et stimulants.",
+    "Mon expertise couvre la préparation des données, la modélisation, l'évaluation et le déploiement de solutions data en environnement réel.",
   ],
   emails: ['salmafennane36@gmail.com'],
   phone: '06 07 19 57 11',
@@ -154,7 +154,7 @@ export const technicalSkills: SkillCategory[] = [
   {
     icon: 'code',
     title: 'Langages de Programmation',
-    skills: ['Python', 'Java', 'C++', 'C', 'Matlab', 'JEE', 'JSON', 'Scala'],
+    skills: ['Python', 'Java', 'C++', 'C', 'Matlab', 'JEE', 'JSON'],
   },
   {
     icon: 'database',
@@ -174,6 +174,7 @@ export const technicalSkills: SkillCategory[] = [
       'Talend',
       'Datawarehouse',
       'Hadoop',
+      'Scala',
       'Kafka',
       'Kibana',
     ],
@@ -230,6 +231,11 @@ export const softSkills: SoftSkill[] = [
     name: 'Leadership',
     description: 'Capacité à motiver une équipe et à encadrer des étudiants.',
   },
+  {
+    icon: 'search',
+    name: 'Esprit Critique',
+    description: 'Capacité à interpréter des données complexes et à structurer une analyse fiable.',
+  },
 ];
 
 /* ------------------------------------------------------------------ */
@@ -248,7 +254,7 @@ export const education: Education[] = [
     isLatest: true,
   },
   {
-    period: '2022 – 2024',
+    period: '2024',
     degree: 'Master Recherche',
     field: 'Informatique Décisionnelle et Vision Intelligente (MIDVI)',
     institution: 'Faculté Des Sciences Dhar El Mahraz',
@@ -257,7 +263,7 @@ export const education: Education[] = [
       'Formation avancée en informatique décisionnelle, vision par ordinateur, machine learning et data science. Projet de fin d\'études sur la détection d\'intrusion par réseaux de neurones profonds.',
   },
   {
-    period: '2019 – 2022',
+    period: '2022',
     degree: 'Licence',
     field: 'Sciences Mathématiques et Informatiques',
     institution: 'Faculté Des Sciences Dhar El Mahraz',
